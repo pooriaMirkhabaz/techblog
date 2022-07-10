@@ -1,16 +1,7 @@
 {
-  "files": [
-    "./src/**/*.ts"
-  ],
-  "include": [
-    "./build"
-  ],
-  "exclude": [
-    ".env",
-    "node_modules",
-    ".gitignore",
-    "./src/public/"
-  ],
+  "files": ["./src/**/*.ts"],
+  "include": ["./build"],
+  "exclude": [".env", "node_modules", ".gitignore", "./src/public/"],
   "compilerOptions": {
     "strict": true,
     "rootDir": "src",
@@ -24,11 +15,7 @@
     "experimentalDecorators": true,
     "baseUrl": "./",
     "removeComments": true,
-    "types": [
-      "node"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"]
   }
 }
