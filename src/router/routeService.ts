@@ -11,11 +11,11 @@ class RouteService {
     this.bindRouters()
   }
 
-  private bindRouters () {
+  private bindRouters () : void {
     this.router.registerRouters('/api/v1/home', homeRouters)
   }
 
-  public startRouter () {
+  public startRouter () : void {
     this.router.getRouters().forEach((router : Router, route : string) => {
       this.app.use(route, router)
     })

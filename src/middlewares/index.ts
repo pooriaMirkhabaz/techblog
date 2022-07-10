@@ -7,7 +7,7 @@ class MiddleWare {
     this.app = app
   }
 
-  public run () {
+  public run () : void {
 
   }
 }

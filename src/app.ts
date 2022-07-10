@@ -13,7 +13,7 @@ class App {
     this.router = new RouteService(this.app)
   }
 
-  start () {
+  start () : void {
     // start router
     this.router.startRouter()
 
