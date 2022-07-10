@@ -1,3 +1,4 @@
 import MongoConnection from './mongoose'
-require('dotenv').config()
+import { config } from 'dotenv'
+config()
 MongoConnection()
