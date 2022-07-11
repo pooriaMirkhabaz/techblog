@@ -3,6 +3,7 @@ import { Router } from 'express'
 // controller
 import articleController from './articleControllers'
 const articleRouter = Router()
+
 // eslint-disable-next-line new-cap
 const articleControllersInstance = new articleController()
 
