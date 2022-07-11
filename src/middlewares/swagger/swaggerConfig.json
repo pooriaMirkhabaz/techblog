@@ -32,6 +32,28 @@
                 "produces": [
                     "application/json"
                 ],
+                "parameters": [{
+                        "name": "page",
+                        "in": "query",
+                        "description": "page ID",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "per_Page",
+                        "in": "query",
+                        "description": "page ID",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "fields",
+                        "in": "query",
+                        "description": "select fields in articles : title,slug,image",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Articles List",

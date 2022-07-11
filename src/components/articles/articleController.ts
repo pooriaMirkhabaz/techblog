@@ -5,7 +5,20 @@ import { faker } from '@faker-js/faker'
 class articleControllers {
   public async index (req : Request, res : Response, next : NextFunction) {
     try {
-      const articles = await articleModel.find({})
+      let projection : any = []
+      if (req.query.hasOwnProperty('fields')) {
+        const fields : string = req.query.fields as string
+        projection = fields.trim().split(',').reduce((value, current) => {
+          return {
+            [current.trim()]: 1,
+            ...value
+          }
+        }, {})
+      }
+
+      const page : any = req.query.page ? req.query.page : 1 as number
+      const perPage : any = req.query.per_Page ? req.query.per_Page : 10 as number
+      const articles = await articleModel.find({}, projection).skip(page).limit(perPage)
       res.status(200).send({
         code: 200,
         status: true,
@@ -25,9 +38,9 @@ class articleControllers {
       let projection : any = []
       if (req.query.hasOwnProperty('fields')) {
         const fields : string = req.query.fields as string
-        projection = fields.split(',').reduce((value, current) => {
+        projection = fields.trim().split(',').reduce((value, current) => {
           return {
-            [current]: 1,
+            [current.trim()]: 1,
             ...value
           }
         }, {})
