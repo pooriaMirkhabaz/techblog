@@ -3,7 +3,7 @@ import RouterEngine from './router'
 
 // routers
 import homeRouters from './../components/home/homeRouters'
-import articleRouter from './../components/articles/articleRouters'
+import articleRouter from '../components/articles/articleRouters'
 import categoryRouter from '../components/categories/categoryRouters'
 import userRouter from './../components/users/userRouters'
 

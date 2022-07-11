@@ -1,14 +1,15 @@
 import { Router } from 'express'
 
 // controller
-import articleController from './articleControllers'
+import controller from './articleController'
 const articleRouter = Router()
 
 // eslint-disable-next-line new-cap
-const articleControllersInstance = new articleController()
+const articleControllers = new controller()
 
 // routes
-articleRouter.get('/', articleControllersInstance.index)
-articleRouter.post('/', articleControllersInstance.create)
+articleRouter.get('/', articleControllers.index)
+articleRouter.get('/:id', articleControllers.findByID)
+articleRouter.post('/', articleControllers.create)
 
 export default articleRouter

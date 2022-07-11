@@ -18,6 +18,32 @@ class articleControllers {
     }
   }
 
+  public async findByID (req : Request, res : Response, next : NextFunction) {
+    try {
+      const id = req.params.id
+
+      let projection : any = []
+      if (req.query.hasOwnProperty('fields')) {
+        const fields : string = req.query.fields as string
+        projection = fields.split(',').reduce((value, current) => {
+          return {
+            [current]: 1,
+            ...value
+          }
+        }, {})
+      }
+
+      const article = await articleModel.findOne({ id }, projection)
+      res.status(200).send({
+        code: 200,
+        status: true,
+        data: article
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
   public async create (req: Request, res : Response, next : NextFunction) {
     // const { title, slug, image, content, cat_id, tags, author_id } = req.body
 

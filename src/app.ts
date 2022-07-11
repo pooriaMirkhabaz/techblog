@@ -4,6 +4,7 @@ import RouteService from './router/routeService'
 import MiddleWare from './middlewares'
 import Handler404 from './middlewares/handler_404'
 import Handler500 from './middlewares/handler_500'
+import SwaggerConfig from './middlewares/swagger'
 
 class App {
   private port : number
@@ -12,6 +13,7 @@ class App {
   private middleware : MiddleWare
   private handler404 : Handler404
   private handler500 : Handler500
+  private swagger : SwaggerConfig
 
   constructor (port : number) {
     this.app = express()
@@ -20,11 +22,13 @@ class App {
     this.middleware = new MiddleWare(this.app)
     this.handler404 = new Handler404(this.app)
     this.handler500 = new Handler500(this.app)
+    this.swagger = new SwaggerConfig(this.app)
   }
 
   start () : void {
     // middleware
     this.middleware.run()
+    this.swagger.run()
 
     // start router
     this.router.startRouter()
