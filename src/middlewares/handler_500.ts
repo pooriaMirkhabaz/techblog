@@ -7,7 +7,7 @@ class Handler500 {
   }
 
   public run () {
-    this.app.use((error : Error, req : Request, res : Response, next : NextFunction) => {
+    this.app.use((error : ErrorRequestHandler, req : Request, res : Response, next : NextFunction) => {
       res.status(500).send({
         code: 500,
         status: false,

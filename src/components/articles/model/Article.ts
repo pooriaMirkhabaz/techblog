@@ -10,7 +10,7 @@ const ArticleSchema : Schema = new Schema({
   catId: { type: Schema.Types.ObjectId, ref: 'category', required: true },
   tags: { type: [Object], default: null },
   authorId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
-  status: { type: ArticleStatus, default: ArticleStatus.PENDING },
+  status: { type: Number, default: ArticleStatus.PENDING },
   view: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now }
 })

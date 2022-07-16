@@ -1,11 +1,10 @@
 {
     "watch": [
         "./src",
-        "infrastructure"
+        "infrastructure",
+        "./src/middlewares/swagger/swaggerConfig.json"
     ],
     "ext": "ts",
-    "ignore": [
-        "src/**/*.spec.ts"
-    ],
+    "ignore": ["src/**/*.spec.ts"],
     "exec": "ts-node ./src/server.ts"
 }

@@ -4,7 +4,7 @@ import CategoryStatus from './CategoryStatus'
 
 const CategorySchema : Schema = new Schema({
   title: { type: String, required: true },
-  status: { type: CategoryStatus, default: CategoryStatus.ACTIVE },
+  status: { type: Number, default: CategoryStatus.ACTIVE },
   createdAt: { type: Date, default: Date.now }
 })
 

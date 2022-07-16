@@ -15,23 +15,15 @@
     "host": ["localhost:5000"],
     "basePath": "/api/v1",
     "apis": ["../../components/**/*Routers.ts"],
-    "schemes": [
-        "http"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
     "paths": {
         "/articles": {
             "get": {
                 "description": "Articles List",
                 "operationId": "findArticles",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [{
                         "name": "page",
                         "in": "query",
@@ -75,9 +67,7 @@
             "post": {
                 "description": "Creates a new article",
                 "operationId": "addArticle",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [{
                     "name": "article",
                     "in": "body",
@@ -107,9 +97,7 @@
             "get": {
                 "description": "Returns a data for article",
                 "operationId": "findArticleById",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [{
                         "name": "id",
                         "in": "path",
@@ -144,7 +132,6 @@
                 "description": "deletes a single article based on the ID supplied",
                 "operationId": "deleteArticle",
                 "parameters": [{
-                    "name": "id",
                     "in": "path",
                     "description": "ID of article to delete",
                     "required": true,
@@ -153,6 +140,115 @@
                 "responses": {
                     "204": {
                         "description": "article deleted"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/category": {
+            "get": {
+                "description": "Category List",
+                "operationId": "findCategory",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "sort",
+                    "in": "query",
+                    "description": "sort category, values = 1,-1 => 1 : asc & -1 : desc (default value is 1)",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Category List",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/category"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates a new Category",
+                "operationId": "addCategory",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "Category",
+                    "in": "body",
+                    "description": "add new Category",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/NewCategory"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Category response",
+                        "schema": {
+                            "$ref": "#/definitions/category"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/category/{id}": {
+            "get": {
+                "description": "Returns a category in category id",
+                "operationId": "findCategoryInCategoryId",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID of category to fetch",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "category response",
+                        "schema": {
+                            "$ref": "#/definitions/category"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete a single category based on the ID supplied",
+                "operationId": "deleteCategory",
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID of category to delete",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "category deleted"
                     },
                     "default": {
                         "description": "unexpected error",
@@ -253,12 +349,35 @@
                 }
             }
         },
+        "category": {
+            "type": "object",
+            "allOf": [{
+                    "$ref": "#/definitions/NewCategory"
+                },
+                {
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "NewCategory": {
+            "type": "object",
+            "required": ["title"],
+            "properties": {
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
         "ErrorModel": {
             "type": "object",
-            "required": [
-                "code",
-                "message"
-            ],
+            "required": ["code", "message"],
             "properties": {
                 "code": {
                     "type": "integer",
